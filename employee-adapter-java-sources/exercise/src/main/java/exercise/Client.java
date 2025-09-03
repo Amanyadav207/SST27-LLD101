@@ -1,5 +1,4 @@
 package exercise;
-
 import java.util.*;
 
 public class Client {
@@ -22,7 +21,17 @@ public class Client {
 
     // TODO: Wrap each legacy object with the right adapter and collect into one list
     List<Employee> all = new ArrayList<>();
+    for (EmployeeCSV csv : csvRows) {
+      all.add(new EmployeeCSVAdapter(csv));
+    }
 
+    for (EmployeeDB db : dbRows) {
+      all.add(new EmployeeDBAdapter(db));
+    }
+
+    for (EmployeeLDAP ldap : ldapRows) {
+      all.add(new EmployeeLDAPAdapter(ldap));
+    }
 
     EmployeePrinter.print(all);
   }
